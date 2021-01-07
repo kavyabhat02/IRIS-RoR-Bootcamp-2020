@@ -17,6 +17,7 @@ def lower_case!(words)
   words.map do |i|
     i = i.downcase
   end
+  return words
   return nil
 end
 
