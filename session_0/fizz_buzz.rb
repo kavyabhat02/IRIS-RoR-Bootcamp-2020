@@ -1,6 +1,6 @@
 def fizz_buzz(n:, x:3, y:5)
    if(n < 0)||(x <= 0)||(y <= 0)
-     raise ArgumentError, "Invalid input"
+     raise ArgumentError
    end
    
    array = [*1..n]
