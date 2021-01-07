@@ -18,7 +18,6 @@ def lower_case!(words)
     i = i.downcase
   end
   return words
-  return nil
 end
 
 # Given a prefix and an array of words, return an array containing
@@ -59,7 +58,7 @@ def similarity_score(word_1, word_2)
   end
   
   max = 0
-  l.times do |x|
+  (l+1).times do |x|
     if (word_1[0,x].downcase.eql?(word_2[0,x].downcase))
       max = x
     end
