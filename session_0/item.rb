@@ -29,7 +29,7 @@ class Item
   
   def current_price
     if(discounted?)
-      return price*(100-discount_rate)/100
+      return price * (100-discount_rate)/100
     else
       return price
     end
