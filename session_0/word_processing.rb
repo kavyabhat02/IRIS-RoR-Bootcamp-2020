@@ -4,7 +4,7 @@
 def lower_case(words)
   #raise NotImplementedError # TODO
   sub = []
-  words.each do |i|
+  words.map do |i|
     sub.append(i.downcase)
   end
   return sub
@@ -28,13 +28,7 @@ end
 # return the words 'apple' and 'applesauce'.
 def words_with_prefix(prefix, words)
   #raise NotImplementedError # TODO
-  same = []
-  words.each do |i|
-    if(i.start_with?(prefix))
-      same.append(i)
-    end
-  end
-  return same
+  words.select { |i| i.start_with?(prefix)}
 end
 
 # The similarity score between two words is defined as the length of
