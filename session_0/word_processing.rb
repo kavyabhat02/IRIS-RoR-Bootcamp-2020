@@ -15,7 +15,7 @@ end
 def lower_case!(words)
   #raise NotImplementedError # TODO
   words.map do |i|
-    i = i.downcase
+    i.downcase!
   end
   return words
 end
