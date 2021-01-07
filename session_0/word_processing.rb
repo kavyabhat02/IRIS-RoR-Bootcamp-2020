@@ -53,8 +53,10 @@ def similarity_score(word_1, word_2)
   
   max = 0
   (l+1).times do |x|
-    if (word_1[0,x].downcase.eql?(word_2[0,x].downcase))
-      max = x
+    if (word_1[x].downcase == word_2[x].downcase)
+      max += 1
+    else 
+      break
     end
   end
   return max    
