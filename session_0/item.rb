@@ -36,8 +36,7 @@ class Item
   end
   
   def self.stock_price_by_category(items)
-     final = Hash.new(CATEGORIES.length)
-     final.default = 0
+     final = Hash.new(0)
      items.each do |i|
        final[i.category_id] += i.quantity * i.current_price
      end
