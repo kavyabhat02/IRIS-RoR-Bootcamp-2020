@@ -37,7 +37,6 @@ class Item
  
  def self.stock_price_by_category(items)
     final = CATEGORIES.keys.to_h { |key|, [key, 0] }
-    
     items.each do |i|
       final[i.category_id] += i.quantity * i.current_price
     end
