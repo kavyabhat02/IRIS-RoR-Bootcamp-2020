@@ -45,6 +45,8 @@ end
 # similarity score (an integer).
 def similarity_score(word_1, word_2)
   #raise NotImplementedError # TODO
+  word_1 = word_1.downcase
+  word_2 = word_2.downcase
   if(word_1.length > word_2.length)
     l = word_2.length
   elsif(word_2.length >= word_1.length)
@@ -52,8 +54,8 @@ def similarity_score(word_1, word_2)
   end
   
   max = 0
-  (l+1).times do |x|
-    if (word_1[x].downcase == word_2[x].downcase)
+  l.times do |x|
+    if(word_1[x] == word_2[x])
       max += 1
     else 
       break
