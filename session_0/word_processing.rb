@@ -76,8 +76,8 @@ def most_similar_words(chosen_word, words)
     check = similarity_score(chosen_word, i)
     if(check > max)
        max = check
-       sim.clear() #empty elements which have lower score
-       sim.append(i) #add the newest word
+       sim.clear() 
+       sim.append(i) 
     elsif(check == max)
        sim.append(i) #multiple words with same score
     end
