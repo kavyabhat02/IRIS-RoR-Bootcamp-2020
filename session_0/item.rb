@@ -37,9 +37,9 @@ class Item
   
   def self.stock_price_by_category(items)
      final = {
-       1 => 0
-       2 => 0
-       3 => 0
+       1 => 0,
+       2 => 0,
+       3 => 0,
        4 => 0
      }
      items.each do |i|
