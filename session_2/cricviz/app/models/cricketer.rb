@@ -83,35 +83,34 @@ class Cricketer < ApplicationRecord
   # `ActiveRecord::RecordNotFound` exception with the player's name as
   # the message.
   def self.update_innings(batting_scorecard, bowling_scorecard)
+    #players = Cricketer.eager_load(Cricketer.all)
     batting_scorecard.each do |x|
-      if Cricketer.exists?(name: x[0])
-        batsman = Cricketer.find_by(name: x[0])
-        batsman.not_out += x[1] ?0 :1
-        batsman.runs_scored += x[2]
-        batsman.balls_faced += x[3]
-        batsman.fours_scored += x[4]
-        batsman.sixes_scored += x[5]
-        #updating other records
-        batsman.matches += 1
-        batsman.innings_batted += 1
-        if(batsman.high_score < x[2])
-          batsman.high_score = x[2]
-        end
+        if batsman = Cricketer.find_by(name: x[0])
+          batsman.not_out += x[1] ?0 :1
+          batsman.runs_scored += x[2]
+          batsman.balls_faced += x[3]
+          batsman.fours_scored += x[4]
+          batsman.sixes_scored += x[5]
+          #updating other records
+          batsman.matches += 1
+          batsman.innings_batted += 1
+          if(batsman.high_score < x[2])
+            batsman.high_score = x[2]
+          end
 
-        if x[2]>=50 && x[2]<100
-          batsman.half_centuries += 1
-        elsif x[2]>=100
-          batsman.centuries += 1
+          if x[2]>=50 && x[2]<100
+            batsman.half_centuries += 1
+          elsif x[2]>=100
+            batsman.centuries += 1
+          end
+          batsman.save
+        else
+          raise ActiveRecord::RecordNotFound, x[0]
         end
-        batsman.save
-      else
-        raise ActiveRecord::RecordNotFound, x[0]
-      end
     end
 
     bowling_scorecard.each do |x|
-      if Cricketer.exists?(name: x[0])
-        bowler = Cricketer.find_by(name: x[0])
+      if bowler = Cricketer.find_by(name: x[0])
         bowler.balls_bowled += x[1]
         bowler.runs_given += x[3]
         bowler.wickets_taken += x[4]
