@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_url, notce: 'Logged in!'
+      user.private_articles_remaining = 3
+      session[:private_articles_remaining] = user.private_articles_remaining
+      redirect_to root_url, notice: 'Logged in!'
     else
       flash[:alert] = 'Email or password is invalid'
       render 'new'

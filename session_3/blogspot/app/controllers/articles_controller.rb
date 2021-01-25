@@ -11,6 +11,11 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    #Article creator can view own private article multiple times
+    if @article.user_id != session[:user_id] && !@article.public
+      current_user.private_articles_remaining -= 1
+      current_user.save
+    end
   end
 
   # GET /articles/new

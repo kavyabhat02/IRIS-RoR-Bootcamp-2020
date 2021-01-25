@@ -30,11 +30,25 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    
+    #For all users
     can :index, Article
+    can :index, User
+    #Read public articles
     can :show, Article, public: true
-    if user.present?
-      can :show, Article, public:false
 
+    #Create user
+    can :new, User
+    can :create, User
+    can :show, User
+    
+    if user.present?
+      #Read private articles
+      if user.private_articles_remaining != 0
+        can :show, Article, public:false
+      end
+
+      #Create new articles
       can :new, Article
       can :create, Article
 
@@ -44,6 +58,27 @@ class Ability
       
       # Destroy own article
       can :destroy, Article, user_id: user.id 
+
+      # Edit own profile
+      can :edit, User, user_id: user.id
+      can :update, User, user_id: user.id
+
+      can :edit, User, email: user.email
+      can :update, User, email: user.email
+
+      #Delete own profile
+      can :destroy, User, user_id: user.id
+
+      if user.admin
+        can :edit, Article
+        can :update, Article
+
+        can :edit, User
+        can :update, User
+ 
+        can :destroy, Article
+        can :destroy, User
+      end
     end
   end
 end
